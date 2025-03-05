@@ -11,6 +11,7 @@ import UIKit
 class CalculatorViewController: UIViewController {
     
     var tip = 0.1
+    var numberOfPeople = 2
     
     //MARK: Outlets
     @IBOutlet weak var billTextField: UITextField!
@@ -48,9 +49,16 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func stepperValueChanged(_ sender: UIStepper) {
+        //Get the stepper value using sender.value, round it down to a whole number then set it as the text in
+               //the splitNumberLabel
+               splitNumberLabel.text = String(format: "%.0f", sender.value)
+               
+               //Set the numberOfPeople property as the value of the stepper as a whole number.
+               numberOfPeople = Int(sender.value)
     }
     
     @IBAction func calculatePressed(_ sender: UIButton) {
+        print(numberOfPeople)
     }
     
 }
