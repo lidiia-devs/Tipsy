@@ -12,6 +12,8 @@ class CalculatorViewController: UIViewController {
     
     var tip = 0.1
     var numberOfPeople = 2
+    var billTotal = 0.0
+    
     
     //MARK: Outlets
     @IBOutlet weak var billTextField: UITextField!
@@ -33,19 +35,19 @@ class CalculatorViewController: UIViewController {
         let buttonTitleAsNumber = Double(buttonTitleRemovePercentageSign)!
         
         tip = buttonTitleAsNumber / 100
-        if zeroPctButton.isSelected == true {
-//            tenPctButton.isSelected = false
-//            twentyPctButton.isSelected = false
-            print("No tip")
-        } else if tenPctButton.isSelected == true {
-//            zeroPctButton.isSelected = false
-//            twentyPctButton.isSelected = false
-            print("10% was selected")
-        } else {
-//            zeroPctButton.isSelected = false
-//            tenPctButton.isSelected = false
-            print("20% was selected")
-        }
+      //  if zeroPctButton.isSelected == true {
+////            tenPctButton.isSelected = false
+////            twentyPctButton.isSelected = false
+//            print("No tip")
+//        } else if tenPctButton.isSelected == true {
+////            zeroPctButton.isSelected = false
+////            twentyPctButton.isSelected = false
+//            print("10% was selected")
+//        } else {
+////            zeroPctButton.isSelected = false
+////            tenPctButton.isSelected = false
+//            print("20% was selected")
+//        }
     }
     
     @IBAction func stepperValueChanged(_ sender: UIStepper) {
@@ -58,8 +60,25 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func calculatePressed(_ sender: UIButton) {
-        print(numberOfPeople)
+    
+                let bill = billTextField.text!
+                
+        if bill != "" {
+            //Turn the bill from a String e.g. "123.50" to an actual String with decimal places.
+            billTotal = Double(bill)!
+            //Multiply the bill by the tip percentage and divide by the number of people to split the bill.
+            let result = billTotal * (1 + tip) / Double(numberOfPeople)
+            //Round the result to 2 decimal places and turn it into a String.
+            let resultTo2DecimalPlaces = String(format: "%.2f", result)
+            print(resultTo2DecimalPlaces)
+        }
+//        print(numberOfPeople)
+//        billTotal = Double(billTextField.text ?? "0")!
+//        let sumWithTip = (billTotal + (billTotal * tip)) / Double(numberOfPeople)
+//        let totalSum = String(format: "%.2f", sumWithTip)
+//        print(totalSum)
     }
+    
     
 }
 
