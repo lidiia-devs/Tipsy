@@ -13,6 +13,7 @@ class CalculatorViewController: UIViewController {
     var tip = 0.1
     var numberOfPeople = 2
     var billTotal = 0.0
+    var finalResult = "0.0"
     
     
     //MARK: Outlets
@@ -69,8 +70,12 @@ class CalculatorViewController: UIViewController {
             //Multiply the bill by the tip percentage and divide by the number of people to split the bill.
             let result = billTotal * (1 + tip) / Double(numberOfPeople)
             //Round the result to 2 decimal places and turn it into a String.
-            let resultTo2DecimalPlaces = String(format: "%.2f", result)
-            print(resultTo2DecimalPlaces)
+            finalResult = String(format: "%.2f", result)
+          
+//            let secondVC = ResultViewController()
+//            self.present(secondVC, animated: true, completion: nil)
+            
+            performSegue(withIdentifier: "goToResult", sender: self)
         }
 //        print(numberOfPeople)
 //        billTotal = Double(billTextField.text ?? "0")!
@@ -80,6 +85,15 @@ class CalculatorViewController: UIViewController {
         
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToResult" {
+            
+            let destinationVC = segue.destination as! ResultViewController
+            destinationVC.result = finalResult
+            destinationVC.numberOfPeople = numberOfPeople
+            destinationVC.tipPercentage = Int(tip * 100)
+        }
+    }
     
 }
 
