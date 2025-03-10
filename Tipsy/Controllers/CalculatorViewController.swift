@@ -77,6 +77,7 @@ class CalculatorViewController: UIViewController {
 //        let sumWithTip = (billTotal + (billTotal * tip)) / Double(numberOfPeople)
 //        let totalSum = String(format: "%.2f", sumWithTip)
 //        print(totalSum)
+        
     }
     
     
